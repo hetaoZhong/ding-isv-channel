@@ -1,0 +1,73 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>dingtalk.isv.channel</artifactId>
+    <groupId>com.dingtalk</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
+
+  <groupId>com.dingtalk</groupId>
+  <artifactId>dingtalk.isv.channel.web</artifactId>
+  <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>com.laiwang.lippi</groupId>
+      <artifactId>lippi.oapi.encryt</artifactId>
+      <version>1.0.3-SNAPSHOT</version>
+      <scope>system</scope>
+      <systemPath>${project.basedir}/lib/lippi-oapi-encrpt.jar</systemPath>
+    </dependency>
+
+    <dependency>
+      <groupId>com.dingtalk</groupId>
+      <artifactId>dingtalk.isv.app.biz</artifactId>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <finalName>ding-isv-channel</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-deploy-plugin</artifactId>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>com.alibaba.citrus.tool</groupId>
+        <artifactId>autoconfig-maven-plugin</artifactId>
+        <version>1.2</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>autoconfig</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>2.3</version>
+        <configuration>
+          <webResources>
+            <resource>
+              <directory>lib/</directory>
+              <targetPath>WEB-INF/lib</targetPath>
+              <includes>
+                <include>**/*.jar</include>
+              </includes>
+            </resource>
+          </webResources>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

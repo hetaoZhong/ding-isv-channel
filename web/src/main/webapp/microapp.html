@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cmn">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge"/>
+    <meta name="renderer" content="webkit"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="format-detection" content="telephone=no"/>
+
+    <title>microapp授权test</title>
+    <script src="http://g.alicdn.com/dingding/open-develop/0.7.0/dingtalk.js"></script>
+    <script src="./jquery-3.1.0.js"></script>
+    <script>
+		$(document).ready(function(){
+			var url= window.location.href;
+			var corpId = "ding4ed6d279061db5e7";//这个自己该成授权过的企业CORPID
+
+			var signature = "";
+			var nonce = "";
+			var timeStamp = "";
+			var agentId = "";
+
+			$.post(
+				"get_js_config",
+				{
+				  "url":url,
+				  "corpId":corpId
+				},
+				function(result){
+    			  signature = result.signature;
+    			  nonce = result.nonce;
+    			  timeStamp = result.timeStamp;
+    			  agentId = result.agentId;
+    			  corpId = result.corpId;
+
+				dd.config({
+					"agentId": agentId,
+					"corpId": corpId,
+					"timeStamp": timeStamp,
+					"nonceStr": nonce,
+					"signature": signature,
+					jsApiList: ['device.notification.confirm',
+						'device.notification.alert',
+						'device.notification.prompt',
+						'biz.chat.chooseConversation',
+						'biz.ding.post']
+				});
+
+
+                dd.ready(function() {
+                    alert('dd ready');
+
+                    document.addEventListener('pause', function() {
+                        alert('pause');
+                    });
+
+                    document.addEventListener('resume', function() {
+                        alert('resume');
+                    });
+
+                    //var head = document.querySelector('h1');
+                    //head.innerHTML = head.innerHTML + ' It rocks!';
+
+                    dd.device.notification.alert({
+                        message: 'dd.device.notification.alert',
+                        title: 'This is title',
+                        buttonName: 'button',
+                        onSuccess: function(data) {
+                            alert('win: ' + JSON.stringify(data));
+                        },
+                        onFail: function(err) {
+                            alert('fail: ' + JSON.stringify(err));
+                        }
+                    });
+                });
+
+                dd.error(function(err) {
+                    alert('dd error: ' + JSON.stringify(err));
+                });
+
+  			});
+		});
+
+    </script>
+</head>
+<body>
+this is a test microapp check jsapi service
+</body>
+</html>

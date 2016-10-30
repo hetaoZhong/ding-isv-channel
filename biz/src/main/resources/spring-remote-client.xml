@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd"
+       default-autowire="byName">
+
+
+       <bean id="corpSuiteAuthService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+              <property name="serviceUrl" value="${service.remote.isv.access}/r/CorpSuiteAuthService" />
+              <property name="serviceInterface" value="com.dingtalk.isv.access.api.service.suite.CorpSuiteAuthService" />
+       </bean>
+
+       <bean id="corpManageService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+              <property name="serviceUrl" value="${service.remote.isv.access}/r/CorpManageService" />
+              <property name="serviceInterface" value="com.dingtalk.isv.access.api.service.corp.CorpManageService" />
+       </bean>
+
+
+       <bean id="orgManangerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+              <property name="serviceUrl" value="${service.remote.isv.access}/r/OrgManangerService" />
+              <property name="serviceInterface" value="com.dingtalk.isv.access.api.service.org.OrgManangerService" />
+       </bean>
+
+</beans>
+

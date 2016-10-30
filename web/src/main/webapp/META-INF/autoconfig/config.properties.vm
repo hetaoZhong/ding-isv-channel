@@ -1,0 +1,8 @@
+#log
+log.dir=${log_dir}
+log.level=${log_level}
+#env
+system.env=${system_env}
+#remote service
+service.remote.isv.access=${service_remote_isv_access}
+#crm sys

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config description="Autoconfig Template">
+
+    <group name="logger">
+        <property name="log.dir" defaultValue="/home/mint/logs/ding-isv-channel" description="日志父目录"/>
+        <property name="log.level" defaultValue="info" description="日志级别"/>
+    </group>
+
+    <group name="env">
+        <!--https://oapi.dingtalk.com -->
+        <property name="system.env" defaultValue="daily" description="环境"/>
+    </group>
+
+
+    <group name="spring-remote">
+        <!--https://oapi.dingtalk.com -->
+        <property name="service.remote.isv.access" defaultValue="http://127.0.0.1:8080/ding-isv-access" description="远程服务地址"/>
+    </group>
+
+
+    <script>
+        <generate template="log4j.xml.vm" destfile="WEB-INF/log4j.xml" charset="UTF-8"/>
+        <generate template="config.properties.vm" destfile="WEB-INF/config.properties" charset="UTF-8"/>
+    </script>
+
+</config>
